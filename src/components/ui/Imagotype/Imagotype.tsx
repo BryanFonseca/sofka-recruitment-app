@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 import BillsIcon from "./BillsIcon";
-import { designSystem } from "../constants";
+import { designSystem } from "../../../../constants";
 
-function Logo() {
+export function Imagotype() {
     return (
         <View style={styles.container}>
             <BillsIcon />
@@ -25,5 +25,3 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
 });
-
-export default Logo;

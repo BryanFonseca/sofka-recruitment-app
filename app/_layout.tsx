@@ -1,5 +1,5 @@
 import { SplashScreen, Stack } from "expo-router";
-import Imagotype from "../components/Imagotype";
+import { Imagotype } from "@ui";
 import { useEffect } from "react";
 import {
     useFonts,
