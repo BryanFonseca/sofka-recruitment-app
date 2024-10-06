@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { designSystem } from "../../../../constants";
+import { designSystem } from "@constants";
 
 // Returns a similar version of the icon shown in the spec doc
 function BillsIcon() {

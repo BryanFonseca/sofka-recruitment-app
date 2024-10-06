@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import BillsIcon from "./BillsIcon";
-import { designSystem } from "../../../../constants";
+import { designSystem } from "@constants";
 
 export function Imagotype() {
     return (

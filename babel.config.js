@@ -10,6 +10,7 @@ module.exports = function (api) {
                     extensions: [".js", ".ts", ".jsx", ".tsx", ".json"],
                     alias: {
                         "@ui": "./src/components/ui/index",
+                        "@constants": "./src/constants/index",
                     },
                 },
             ],
