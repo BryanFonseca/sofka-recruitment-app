@@ -8,6 +8,7 @@ import {
     RobotoSlab_600SemiBold,
     RobotoSlab_700Bold,
 } from "@expo-google-fonts/roboto-slab";
+import { designSystem } from "@constants";
 
 function Layout() {
     const [loaded, error] = useFonts({
@@ -33,6 +34,7 @@ function Layout() {
                 headerTitle: () => <Imagotype />,
                 contentStyle: {
                     padding: "5%",
+                    backgroundColor: designSystem.colors.white
                 },
             }}
         />
