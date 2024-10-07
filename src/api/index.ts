@@ -52,6 +52,18 @@ export async function editProduct(id: string, product: RemoteProductItem) {
     return data.data;
 }
 
+export async function deleteProduct(id: string) {
+    const response = await fetch(`${PRODUCTS_RESOURCE_URL}/${id}`, {
+        method: "DELETE",
+    });
+
+    if (!response.ok) {
+        throw new Error(response.status + "");
+    }
+
+    return true;
+}
+
 export async function exists(id: string) {
     const result = await fetch(`${PRODUCTS_RESOURCE_URL}/${id}`);
     return result.status === 200;
