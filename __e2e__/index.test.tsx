@@ -9,16 +9,18 @@ import { useProductItems } from "../src/hooks/useProductItems";
 
 jest.mock("../src/hooks/useProductItems");
 
-describe("F1", () => {
-    beforeEach(() => {
-        (useProductItems as jest.Mock).mockReturnValue({
-            productItems: [
-                { id: 1, name: "Producto 1" },
-                { id: 2, name: "Producto 2" },
-            ],
-        });
-    });
+const PRODUCTS_MOCK = [
+    { id: 1, name: "Producto 1" },
+    { id: 2, name: "Producto 2" },
+];
 
+beforeEach(() => {
+    (useProductItems as jest.Mock).mockReturnValue({
+        productItems: PRODUCTS_MOCK,
+    });
+});
+
+describe("F1", () => {
     it("should display a list of products", async () => {
         render(<Page />);
 
@@ -66,5 +68,13 @@ describe("F2", () => {
 
         const product2 = screen.queryByText("Producto 2");
         expect(product2).toBeNull();
+    });
+});
+
+describe("F3", () => {
+    it("should show total number of products", async () => {
+        render(<Page />);
+        const countText = screen.getByText(`${PRODUCTS_MOCK.length} items`);
+        expect(countText).toBeOnTheScreen();
     });
 });
