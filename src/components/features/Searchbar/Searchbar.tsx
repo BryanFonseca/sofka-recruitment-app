@@ -1,8 +1,20 @@
 import { designSystem } from "@constants";
 import { StyleSheet, TextInput } from "react-native";
 
-export function Searchbar() {
-    return <TextInput placeholder="Search..." style={styles.container} />;
+interface ISearchbarProps {
+    value: string;
+    onChange: (value: string) => void;
+}
+
+export function Searchbar({ value, onChange }: ISearchbarProps) {
+    return (
+        <TextInput
+            value={value}
+            onChangeText={onChange}
+            placeholder="Search..."
+            style={styles.container}
+        />
+    );
 }
 
 const styles = StyleSheet.create({

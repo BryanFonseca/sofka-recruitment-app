@@ -1,5 +1,10 @@
 import Page from "../app/index";
-import { render, screen, fireEvent } from "@testing-library/react-native";
+import {
+    render,
+    screen,
+    fireEvent,
+    waitFor,
+} from "@testing-library/react-native";
 import { useProductItems } from "../src/hooks/useProductItems";
 
 jest.mock("../src/hooks/useProductItems");
@@ -48,5 +53,18 @@ describe("F1", () => {
 });
 
 describe("F2", () => {
-    it.todo("should filter products when searching");
+    it("should filter products when searching", async () => {
+        render(<Page />);
+
+        const searchbar = screen.getByPlaceholderText("Search...");
+        fireEvent.changeText(searchbar, "Producto 1");
+
+        await waitFor(() => {
+            const product1 = screen.getByText("Producto 1");
+            expect(product1).toBeOnTheScreen();
+        });
+
+        const product2 = screen.queryByText("Producto 2");
+        expect(product2).toBeNull();
+    });
 });
