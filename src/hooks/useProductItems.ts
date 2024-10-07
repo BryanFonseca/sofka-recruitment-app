@@ -1,3 +1,4 @@
+import { findAllProducts } from "@api";
 import { ProductItem } from "Models/ProductItem";
 import { useEffect, useState } from "react";
 
@@ -7,13 +8,9 @@ export const useProductItems = () => {
     useEffect(() => {
         const fetchMenuItems = async () => {
             try {
-                const result = await fetch("http://localhost:3002/bp/products");
-                const productItems = (await result.json()) as {
-                    data: RemoteProductItem[];
-                };
-
+                const remoteProducts = await findAllProducts();
                 setProductItems(
-                    productItems.data.map((item) => new ProductItem(item))
+                    remoteProducts.map((item) => new ProductItem(item))
                 );
             } catch (error) {
                 console.error(error);

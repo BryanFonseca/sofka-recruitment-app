@@ -2,9 +2,10 @@ import { View } from "react-native";
 import { ProductsList } from "components/features/ProductsList/ProductsList";
 import { Searchbar } from "../src/components/features/Searchbar/Searchbar";
 import { Button } from "@ui";
-import { useProductItems } from "hooks/useProductItems";
 import { useState } from "react";
 import { ProductsCount } from "components/features/ProductsList/ProductsCount";
+import { Link } from "expo-router";
+import { useProductItems } from "@hooks";
 
 function Page() {
     const { productItems } = useProductItems();
@@ -24,7 +25,9 @@ function Page() {
                 <ProductsList products={filteredProducts} />
             </View>
 
-            <Button>Agregar</Button>
+            <Link href='/create' asChild>
+                <Button>Agregar</Button>
+            </Link>
         </View>
     );
 }

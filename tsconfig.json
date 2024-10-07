@@ -5,7 +5,10 @@
         "baseUrl": "src",
         "paths": {
             "@ui": ["components/ui/index.ts"],
-            "@constants": ["constants/index.ts"]
+            "@constants": ["constants/index.ts"],
+            "@utils": ["utils/index.ts"],
+            "@api": ["api/index.ts"],
+            "@hooks": ["hooks/index.ts"]
         }
     }
 }

@@ -7,3 +7,7 @@ jest.mock("@expo/vector-icons", () => ({
     Ionicons: "",
     AntDesign: "",
 }));
+
+jest.mock("expo-router", () => ({
+    Link: "",
+}));
