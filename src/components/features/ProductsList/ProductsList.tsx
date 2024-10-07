@@ -1,4 +1,4 @@
-import { View, StyleSheet, FlatList, ScrollView } from "react-native";
+import { View, Text, StyleSheet, FlatList, ScrollView } from "react-native";
 import { List, Separator } from "@ui";
 import { designSystem } from "@constants";
 import { ProductItem } from "Models/ProductItem";
@@ -9,6 +9,14 @@ interface IProductsListProps {
 }
 
 export function ProductsList({ products }: IProductsListProps) {
+    if (products.length === 0) {
+        return (
+            <List.Container>
+                <List.Item><Text>Sin contenido</Text></List.Item>
+            </List.Container>
+        );
+    }
+
     return (
         <View style={styles.container}>
             <FlatList

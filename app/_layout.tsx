@@ -41,7 +41,20 @@ function Layout() {
                         backgroundColor: designSystem.colors.white,
                     },
                 }}
-            />
+            >
+                <Stack.Screen
+                    name="index"
+                    options={{
+                        title: "Inicio",
+                    }}
+                />
+                <Stack.Screen
+                    name="details/[id]/index"
+                    options={{
+                        title: "Detalle",
+                    }}
+                />
+            </Stack>
         </QueryClientProvider>
     );
 }
