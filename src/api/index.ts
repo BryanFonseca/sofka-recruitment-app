@@ -34,6 +34,24 @@ export async function createProduct(product: RemoteProductItem) {
     return data.data;
 }
 
+export async function editProduct(id: string, product: RemoteProductItem) {
+    const response = await fetch(`${PRODUCTS_RESOURCE_URL}/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(product),
+    });
+
+    if (!response.ok) {
+        throw new Error(response.status + "");
+    }
+
+    const data = (await response.json()) as { data: RemoteProductItem };
+
+    return data.data;
+}
+
 export async function exists(id: string) {
     const result = await fetch(`${PRODUCTS_RESOURCE_URL}/${id}`);
     return result.status === 200;

@@ -1,6 +1,6 @@
 import { useProduct } from "@hooks";
 import { Button } from "@ui";
-import { useLocalSearchParams } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import { View, Text, StyleSheet, Image } from "react-native";
 
 function ProductDetailPage() {
@@ -63,7 +63,9 @@ function ProductDetailPage() {
             </View>
 
             <View style={{ gap: 8 }}>
-                <Button variant="secondary">Editar</Button>
+                <Link href='./edit' asChild>
+                    <Button variant="secondary">Editar</Button>
+                </Link>
                 <Button variant="danger">Eliminar</Button>
             </View>
         </View>

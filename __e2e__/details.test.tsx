@@ -8,6 +8,7 @@ jest.mock("@hooks", () => ({
 }));
 jest.mock("expo-router", () => ({
     useLocalSearchParams: jest.fn(),
+    Link: "",
 }));
 
 describe("ProductDetailPage", () => {

@@ -9,9 +9,10 @@ import { exists } from "@api";
 interface IProductForm {
     onSubmit: () => void;
     onReset: () => void;
+    checkId?: boolean;
 }
 
-export function ProductForm({ onSubmit, onReset }: IProductForm) {
+export function ProductForm({ onSubmit, onReset, checkId = true }: IProductForm) {
     const {
         control,
         formState: { errors },
@@ -42,6 +43,7 @@ export function ProductForm({ onSubmit, onReset }: IProductForm) {
                         },
                         validate: {
                             validId: async (id) => {
+                                if (!checkId) return true;
                                 const alreadyExists = await exists(id);
                                 if (alreadyExists) return "ID ya existe";
                                 return true;
