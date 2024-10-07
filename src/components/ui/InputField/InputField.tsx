@@ -1,12 +1,5 @@
 import { designSystem } from "@constants";
-import { ReactNode } from "react";
-import {
-    StyleSheet,
-    Text,
-    TextInput,
-    TextInputProps,
-    View,
-} from "react-native";
+import { StyleSheet, TextInput, TextInputProps } from "react-native";
 import { Field } from "../Field/Field";
 
 interface IInputProps extends TextInputProps {
@@ -45,7 +38,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: designSystem.colors.darkGray,
         borderRadius: 3,
-        width: "100%",
         paddingVertical: 8,
         paddingHorizontal: 10,
     },

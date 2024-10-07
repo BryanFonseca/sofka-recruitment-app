@@ -1,4 +1,3 @@
-import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react-native";
 import { Button } from "./Button";
 
@@ -6,7 +5,6 @@ describe("<Button />", () => {
     it("should render and display the correct text", () => {
         render(<Button>Click me</Button>);
 
-        // Check if the button text is rendered correctly
         const buttonText = screen.getByText("Click me");
         expect(buttonText).toBeOnTheScreen();
     });

@@ -1,9 +1,10 @@
-import { render } from "@testing-library/react-native";
+import { render, screen } from "@testing-library/react-native";
 import { Separator } from "./Separator";
 
 describe("<Separator />", () => {
     it("should render", () => {
-        const { getByTestId } = render(<Separator />);
-        expect(getByTestId("separator")).toBeTruthy();
+        render(<Separator />);
+        const separator = screen.getByTestId("separator");
+        expect(separator).toBeOnTheScreen();
     });
 });

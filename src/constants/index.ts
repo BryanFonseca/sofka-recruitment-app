@@ -4,7 +4,7 @@ export const designSystem = {
         accentDarker: "#ebcb00",
         danger: "#d50708",
         blue: "#10265c",
-        lightGray: "#dee4ed", // Similar color with higher contrast
+        lightGray: "#ced7e4" /*dee4ed*/, // Similar color with higher contrast
         gray: "#eaecf3",
         darkGray: "#6e6e73",
         disabledGray: "#f6f6f6",
