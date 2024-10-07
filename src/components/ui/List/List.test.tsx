@@ -1,22 +1,22 @@
-import { render } from "@testing-library/react-native";
+import { render, screen } from "@testing-library/react-native";
 import { Text } from "react-native";
 import { List } from "./List";
 
 describe("<List.Container />", () => {
     it("should render children inside the container", () => {
-        const { getByText } = render(
+        render(
             <List.Container>
                 <List.Item>
                     <Text>Item 1</Text>
                 </List.Item>
             </List.Container>
         );
-
-        expect(getByText("Item 1")).toBeTruthy();
+        const itemElement = screen.getByText("Item 1");
+        expect(itemElement).toBeOnTheScreen();
     });
 
     it("should render multiple children with separators", () => {
-        const { getByText, getAllByTestId } = render(
+        render(
             <List.Container>
                 <List.Item>
                     <Text>Item 1</Text>
@@ -27,34 +27,37 @@ describe("<List.Container />", () => {
             </List.Container>
         );
 
-        expect(getByText("Item 1")).toBeTruthy();
-        expect(getByText("Item 2")).toBeTruthy();
+        const item1Element = screen.getByText("Item 1");
+        const item2Element = screen.getByText("Item 2");
 
-        const separators = getAllByTestId("separator");
+        expect(item1Element).toBeOnTheScreen();
+        expect(item2Element).toBeOnTheScreen();
+
+        const separators = screen.getAllByTestId("separator");
         expect(separators.length).toBe(1);
     });
 
     it("should not render a separator when there is only one child", () => {
-        const { queryAllByTestId } = render(
+        render(
             <List.Container>
                 <List.Item>
                     <Text>Item 1</Text>
                 </List.Item>
             </List.Container>
         );
-
-        const separators = queryAllByTestId("separator");
+        const separators = screen.queryAllByTestId("separator");
         expect(separators.length).toBe(0);
     });
 });
 
 describe("<List.Item />", () => {
     it("should render children inside the item", () => {
-        const { getByText } = render(
+        render(
             <List.Item>
                 <Text>Item 1</Text>
             </List.Item>
         );
-        expect(getByText("Item 1")).toBeTruthy();
+        const item = screen.getByText("Item 1");
+        expect(item).toBeOnTheScreen();
     });
 });

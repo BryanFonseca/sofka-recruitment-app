@@ -6,7 +6,8 @@ beforeEach(cleanup);
 describe("<Input />", () => {
     it("should render", () => {
         render(<InputField label="ID" value="123" />);
-        screen.getByTestId("input");
+        const inputElement = screen.getByTestId("input");
+        expect(inputElement).toBeOnTheScreen();
     });
 
     it("should present error state & error message", () => {
@@ -15,6 +16,6 @@ describe("<Input />", () => {
             <InputField label="Name" hasError errorMessage={errorMessage} />
         );
         const errorMessageElement = queryByText(errorMessage);
-        expect(errorMessageElement).toBeTruthy();
+        expect(errorMessageElement).toBeOnTheScreen();
     });
 });
