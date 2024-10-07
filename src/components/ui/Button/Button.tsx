@@ -1,5 +1,6 @@
 import { designSystem } from "@constants";
-import { Pressable, StyleSheet, ViewStyle } from "react-native";
+import { forwardRef } from "react";
+import { Pressable, StyleSheet, View, ViewStyle } from "react-native";
 import { Text } from "react-native";
 
 type TVariants = "primary" | "secondary" | "danger";
@@ -25,29 +26,31 @@ interface IButtonProps {
     onPress?: () => void;
 }
 
-export function Button({
-    children,
-    variant = "primary",
-    onPress = () => {},
-}: IButtonProps) {
-    return (
-        <Pressable
-            onPress={onPress}
-            style={[styles.container, styles[variant]]}
-        >
-            <Text
-                style={[
-                    styles.title,
-                    variant === "danger"
-                        ? { color: designSystem.colors.white }
-                        : null,
-                ]}
+export const Button = forwardRef<View, IButtonProps>(
+    (
+        { children, variant = "primary", onPress = () => {} }: IButtonProps,
+        ref
+    ) => {
+        return (
+            <Pressable
+                ref={ref}
+                onPress={onPress}
+                style={[styles.container, styles[variant]]}
             >
-                {children}
-            </Text>
-        </Pressable>
-    );
-}
+                <Text
+                    style={[
+                        styles.title,
+                        variant === "danger"
+                            ? { color: designSystem.colors.white }
+                            : null,
+                    ]}
+                >
+                    {children}
+                </Text>
+            </Pressable>
+        );
+    }
+);
 
 const styles = StyleSheet.create({
     container: {
