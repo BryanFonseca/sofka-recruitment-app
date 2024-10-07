@@ -36,7 +36,7 @@ export function InputField({
 const styles = StyleSheet.create({
     container: {
         borderWidth: 1,
-        borderColor: designSystem.colors.darkGray,
+        borderColor: designSystem.colors.lightGray,
         borderRadius: 3,
         paddingVertical: 8,
         paddingHorizontal: 10,

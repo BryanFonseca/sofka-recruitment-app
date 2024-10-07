@@ -1,1 +1,1 @@
-export { isValidDateFormat, isFutureDate, isOneYearLater } from "./helpers";
+export { isValidDateFormat, isFutureDate, isOneYearLater, convertToDashedDate, convertToSlashedDate } from "./helpers";

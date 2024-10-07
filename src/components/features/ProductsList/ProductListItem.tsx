@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { designSystem } from "@constants";
+import { Link } from "expo-router";
 
 interface IProductListItemProps {
     id: string;
@@ -9,17 +10,25 @@ interface IProductListItemProps {
 
 export function ProductListItem({ id, name }: IProductListItemProps) {
     return (
-        <View style={styles.container}>
-            <View style={styles.textContainer}>
-                <Text style={styles.nameText}>{name}</Text>
-                <Text style={styles.idText}>ID: {id}</Text>
-            </View>
-            <AntDesign
-                name="right"
-                size={16}
-                color={designSystem.colors.darkGray}
-            />
-        </View>
+        <Link
+            href={{
+                pathname: "/details/[id]",
+                params: { id },
+            }}
+            asChild
+        >
+            <Pressable style={styles.container}>
+                <View style={styles.textContainer}>
+                    <Text style={styles.nameText}>{name}</Text>
+                    <Text style={styles.idText}>ID: {id}</Text>
+                </View>
+                <AntDesign
+                    name="right"
+                    size={16}
+                    color={designSystem.colors.darkGray}
+                />
+            </Pressable>
+        </Link>
     );
 }
 

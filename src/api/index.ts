@@ -2,6 +2,12 @@ const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 const PRODUCTS_RESOURCE_URL = `${apiUrl}/products`;
 
+export async function findOneProduct(id: string) {
+    const result = await fetch(`${PRODUCTS_RESOURCE_URL}/${id}`);
+    const productItems = (await result.json()) as RemoteProductItem;
+    return productItems;
+}
+
 export async function findAllProducts() {
     const result = await fetch(PRODUCTS_RESOURCE_URL);
     const productItems = (await result.json()) as {

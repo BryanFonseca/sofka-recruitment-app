@@ -35,7 +35,12 @@ export function isOneYearLater(date1: string, date2: string): boolean {
     );
 }
 
-export function convertDate(dateString: string): string {
-    const [day, month, year] = dateString.split('/');
+export function convertToDashedDate(dateString: string): string {
+    const [day, month, year] = dateString.split("/");
     return `${year}-${month}-${day}`;
+}
+
+export function convertToSlashedDate(dateString: string): string {
+    const [year, month, day] = dateString.split("-");
+    return `${day}/${month}/${year}`;
 }
