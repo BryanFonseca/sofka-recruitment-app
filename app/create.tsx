@@ -13,13 +13,11 @@ function CreatePage() {
 
     const { createProduct } = useCreateProduct({
         onSuccess: () => {
-            console.log("Se creó correctamente");
-            router.replace("/");
+            router.navigate("/");
         },
     });
 
     function handleSubmit(values: ICreationFormValues) {
-        // console.log(values);
         createProduct(values);
     }
 

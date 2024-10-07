@@ -9,6 +9,9 @@ import {
     RobotoSlab_700Bold,
 } from "@expo-google-fonts/roboto-slab";
 import { designSystem } from "@constants";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 function Layout() {
     const [loaded, error] = useFonts({
@@ -29,15 +32,17 @@ function Layout() {
     }
 
     return (
-        <Stack
-            screenOptions={{
-                headerTitle: () => <Imagotype />,
-                contentStyle: {
-                    padding: "5%",
-                    backgroundColor: designSystem.colors.white
-                },
-            }}
-        />
+        <QueryClientProvider client={queryClient}>
+            <Stack
+                screenOptions={{
+                    headerTitle: () => <Imagotype />,
+                    contentStyle: {
+                        padding: "5%",
+                        backgroundColor: designSystem.colors.white,
+                    },
+                }}
+            />
+        </QueryClientProvider>
     );
 }
 

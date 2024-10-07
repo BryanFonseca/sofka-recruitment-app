@@ -27,7 +27,6 @@ function EditForm({ defaultValues }: IEditFormProps) {
     const { editProduct } = useEditProduct({
         id: defaultValues.id,
         onSuccess: () => {
-            console.log("Se editó correctamente");
             // TODO: This shouldn't be here
             router.back();
         },

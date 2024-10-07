@@ -13,3 +13,7 @@ export const designSystem = {
         white: "#fff",
     },
 };
+
+export const queryKeys = {
+    products: "PRODUCTS",
+};

@@ -1,28 +1,37 @@
-import { createProduct, deleteProduct } from "@api";
+import { deleteProduct as deleteProductApi } from "@api";
+import { queryKeys } from "@constants";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ProductItem } from "Models/ProductItem";
 
 interface IUseDeleteProductParams {
     id: string;
     onSuccess?: () => void;
-    onFailure?: () => void;
+    onError?: () => void;
 }
 
 export function useDeleteProduct({
     id,
     onSuccess = () => {},
-    onFailure = () => {},
+    onError = () => {},
 }: IUseDeleteProductParams) {
-    return {
-        deleteProduct: async () => {
-            try {
-                const r = await deleteProduct(id);
-                console.log(r);
-                onSuccess();
-            } catch (error) {
-                onFailure();
-            }
+    const queryClient = useQueryClient();
+    const {
+        mutate: deleteProduct,
+        isPending: isLoading,
+        isError,
+    } = useMutation({
+        mutationFn: () => deleteProductApi(id),
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: [queryKeys.products],
+            });
+            onSuccess();
         },
-        isLoading: true,
-        isError: false,
+        onError,
+    });
+    return {
+        deleteProduct,
+        isLoading,
+        isError,
     };
 }

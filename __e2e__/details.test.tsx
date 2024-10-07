@@ -1,14 +1,17 @@
 import { render, screen, waitFor } from "@testing-library/react-native";
 import ProductDetailPage from "../app/details/[id]";
-import { useProduct } from "@hooks";
+import { useDeleteProduct, useProduct } from "@hooks";
 import { useLocalSearchParams } from "expo-router";
+import { deleteProduct } from "@api";
 
 jest.mock("@hooks", () => ({
     useProduct: jest.fn(),
+    useDeleteProduct: jest.fn(),
 }));
 jest.mock("expo-router", () => ({
     useLocalSearchParams: jest.fn(),
     Link: "",
+    useRouter: jest.fn(),
 }));
 
 describe("ProductDetailPage", () => {
@@ -21,6 +24,9 @@ describe("ProductDetailPage", () => {
 
     beforeEach(() => {
         (useProduct as jest.Mock).mockReturnValue({ product: mockProductData });
+        (useDeleteProduct as jest.Mock).mockReturnValue({
+            deleteProduct: jest.fn(),
+        });
         (useLocalSearchParams as jest.Mock).mockReturnValue({ id: "1" });
     });
 

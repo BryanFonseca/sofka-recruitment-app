@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { ProductsList } from "components/features/ProductsList/ProductsList";
 import { Searchbar } from "../src/components/features/Searchbar/Searchbar";
 import { Button } from "@ui";
@@ -8,11 +8,15 @@ import { Link } from "expo-router";
 import { useProductItems } from "@hooks";
 
 function Page() {
-    const { productItems } = useProductItems();
+    const { productItems, isLoading, isError } = useProductItems();
     const [filterText, setFilterText] = useState("");
     const filteredProducts = productItems.filter((product) =>
         product.name.toLowerCase().includes(filterText.toLowerCase())
     );
+
+    if (isLoading) return <Text>Loading...</Text>;
+
+    if (isError) return <Text>Some error ocurred while fetching the data.</Text>;
 
     return (
         <View
@@ -25,7 +29,7 @@ function Page() {
                 <ProductsList products={filteredProducts} />
             </View>
 
-            <Link href='/create' asChild>
+            <Link href="/create" asChild>
                 <Button>Agregar</Button>
             </Link>
         </View>
