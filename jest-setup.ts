@@ -8,6 +8,10 @@ jest.mock("@expo/vector-icons", () => ({
     AntDesign: "",
 }));
 
+jest.mock("expo-linear-gradient", () => ({
+    LinearGradient: "",
+}));
+
 jest.mock("expo-router", () => ({
     Link: "",
 }));

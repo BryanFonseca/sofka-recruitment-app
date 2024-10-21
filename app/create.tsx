@@ -9,8 +9,6 @@ function CreatePage() {
     const router = useRouter();
 
     const form = useForm<ICreationFormValues>();
-    const { handleSubmit: handleSubmitWrapper, reset } = form;
-
     const { createProduct } = useCreateProduct({
         onSuccess: () => {
             router.navigate("/");
@@ -22,18 +20,18 @@ function CreatePage() {
     }
 
     function handleResetForm() {
-        reset();
+        form.reset();
     }
 
     return (
-        <View style={{ gap: 24 }}>
+        <View style={{ gap: 24, flex: 1 }}>
             <Text style={{ fontFamily: "robotoSlab_600", fontSize: 26 }}>
                 Formulario de Registro
             </Text>
 
             <FormProvider {...form}>
                 <ProductForm
-                    onSubmit={handleSubmitWrapper(handleSubmit)}
+                    onSubmit={handleSubmit}
                     onReset={handleResetForm}
                 />
             </FormProvider>

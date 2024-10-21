@@ -1,25 +1,26 @@
 import { useDeleteProduct, useProduct } from "@hooks";
-import { Button, ConfirmationBottomSheet } from "@ui";
+import { BankCard, Button, ConfirmationBottomSheet } from "@ui";
 import { Link, useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 // TODO: Split this into multiple components
 function ProductDetailPage() {
     const router = useRouter();
     const { id } = useLocalSearchParams();
     const productId = typeof id === "string" ? id : id[0];
-    const { product } = useProduct({ id: productId });
 
+    const { product, isLoading, isError } = useProduct({ id: productId });
+
+    const [isDeleting, setIsDeleting] = useState(false);
     const { deleteProduct } = useDeleteProduct({
         id: productId,
         onSuccess: () => {
             setIsDeleting(false);
-            router.navigate('/');
+            router.navigate("/");
         },
     });
 
-    const [isDeleting, setIsDeleting] = useState(false);
     function handleConfirmDeletion() {
         deleteProduct();
     }
@@ -28,9 +29,14 @@ function ProductDetailPage() {
         setIsDeleting(true);
     }
 
+    if (isLoading) return <Text>Loading...</Text>;
+
+    if (isError) return <Text>Some error ocurred while getting the data</Text>;
+
     return (
         <>
             <ConfirmationBottomSheet
+                confirmationMessage={`¿Estás seguro de eliminar el producto ${product?.id}?`}
                 isVisible={isDeleting}
                 onConfirm={handleConfirmDeletion}
                 onReject={() => setIsDeleting(false)}
@@ -66,18 +72,7 @@ function ProductDetailPage() {
 
                         <View>
                             <Text style={styles.keyText}>Logo</Text>
-                            <Image
-                                style={{
-                                    width: "60%",
-                                    height: 100,
-                                    alignSelf: "center",
-                                    objectFit: "contain",
-                                    marginVertical: 8,
-                                }}
-                                source={{
-                                    uri: "https://placehold.it/800x400",
-                                }}
-                            />
+                            <BankCard />
                         </View>
 
                         <View style={styles.keyValuePair}>

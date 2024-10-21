@@ -5,6 +5,7 @@ import { Separator } from "../Separator/Separator";
 import { Button } from "../Button/Button";
 
 interface IConfirmationBottomSheet {
+    confirmationMessage: string;
     isVisible: boolean;
     onConfirm: () => void;
     onReject: () => void;
@@ -12,6 +13,7 @@ interface IConfirmationBottomSheet {
 
 // Maybe this should be a confirmation dialog
 export function ConfirmationBottomSheet({
+    confirmationMessage,
     isVisible,
     onConfirm,
     onReject,
@@ -35,12 +37,12 @@ export function ConfirmationBottomSheet({
                 <Separator />
 
                 <Text style={styles.confirmationText}>
-                    ¿Estás seguro de eliminar el producto 1?
+                    {confirmationMessage}
                 </Text>
 
                 <Separator />
 
-                <View style={{ padding: 16, gap: 8 }}>
+                <View style={styles.controlsContainer}>
                     <Button onPress={onConfirm}>Confirmar</Button>
                     <Button onPress={onReject} variant="secondary">
                         Cancelar
@@ -81,5 +83,10 @@ const styles = StyleSheet.create({
     closeButton: {
         padding: 16,
         marginLeft: "auto",
+    },
+    controlsContainer: {
+        padding: 16,
+        gap: 8,
+        marginBottom: 16,
     },
 });

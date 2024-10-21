@@ -1,11 +1,12 @@
 import { editProduct as editProductApi } from "@api";
 import { queryKeys } from "@constants";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { ICreationFormValues } from "components/features/ProductForm/interfaces";
 import { ProductItem } from "Models/ProductItem";
 
 interface IUseEditProductParams {
     id: string;
-    onSuccess?: () => void;
+    onSuccess?: (newId: string) => void;
     onError?: () => void;
 }
 
@@ -20,17 +21,14 @@ export function useEditProduct({
         isPending: isLoading,
         isError,
     } = useMutation({
-        mutationFn: (localProduct: ProductItem) => {
-            return editProductApi(id, ProductItem.toRemote(localProduct));
+        mutationFn: (localProduct: ICreationFormValues) => {
+            return editProductApi(id, new ProductItem(localProduct).toRemote());
         },
-        onSuccess: () => {
+        onSuccess: ({ id }) => {
             queryClient.invalidateQueries({
                 queryKey: [queryKeys.products],
             });
-            queryClient.invalidateQueries({
-                queryKey: [queryKeys.products, id],
-            });
-            onSuccess();
+            onSuccess(id);
         },
         onError,
     });

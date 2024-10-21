@@ -65,10 +65,8 @@ describe("CreatePage", () => {
         );
 
         // kinda unsafe ngl
-        const [releaseDate, revisionDate] =
-            screen.getAllByPlaceholderText("DD/MM/YYYY");
+        const releaseDate = screen.getByPlaceholderText("DD/MM/YYYY");
         fireEvent.changeText(releaseDate, "18/05/2026");
-        fireEvent.changeText(revisionDate, "18/05/2027");
 
         // Submit the form
         fireEvent.press(screen.getByText("Enviar"));

@@ -1,54 +1,72 @@
 import { convertToDashedDate, convertToSlashedDate } from "utils/helpers";
 
 export class ProductItem {
-    private readonly _id: string;
-    private readonly _name: string;
-    private readonly _description: string;
-    private readonly _logo: string;
-    private readonly _releaseDate: string;
-    private readonly _revisionDate: string;
+    readonly #id: string;
+    readonly #name: string;
+    readonly #description: string;
+    readonly #logo: string;
+    readonly #releaseDate: string;
+    readonly #revisionDate: string;
 
-    constructor(item: RemoteProductItem) {
-        this._id = item.id;
-        this._name = item.name;
-        this._description = item.description;
-        this._logo = item.logo;
-        this._releaseDate = convertToSlashedDate(item.date_release);
-        this._revisionDate = convertToSlashedDate(item.date_revision);
+    constructor(item: {
+        id: string;
+        name: string;
+        description: string;
+        logo: string;
+        releaseDate: string;
+        revisionDate: string;
+    }) {
+        this.#id = item.id;
+        this.#name = item.name;
+        this.#description = item.description;
+        this.#logo = item.logo;
+        this.#releaseDate = item.releaseDate;
+        this.#revisionDate = item.revisionDate;
     }
 
-    static toRemote(local: ProductItem): RemoteProductItem {
+    static fromRemote(remote: RemoteProductItem) {
+        return new ProductItem({
+            id: remote.id,
+            name: remote.name,
+            description: remote.description,
+            logo: remote.logo,
+            releaseDate: convertToSlashedDate(remote.date_release),
+            revisionDate: convertToSlashedDate(remote.date_revision),
+        });
+    }
+
+    toRemote(): RemoteProductItem {
         return {
-            id: local.id,
-            name: local.name,
-            description: local.description,
-            logo: local.logo,
-            date_release: convertToDashedDate(local.releaseDate),
-            date_revision: convertToDashedDate(local.revisionDate),
+            id: this.id,
+            name: this.name,
+            description: this.description,
+            logo: this.logo,
+            date_release: convertToDashedDate(this.releaseDate),
+            date_revision: convertToDashedDate(this.revisionDate),
         };
     }
 
     get id() {
-        return this._id;
+        return this.#id;
     }
 
     get name() {
-        return this._name;
+        return this.#name;
     }
 
     get description() {
-        return this._description;
+        return this.#description;
     }
 
     get logo() {
-        return this._logo;
+        return this.#logo;
     }
 
     get releaseDate() {
-        return this._releaseDate;
+        return this.#releaseDate;
     }
 
     get revisionDate() {
-        return this._revisionDate;
+        return this.#revisionDate;
     }
 }

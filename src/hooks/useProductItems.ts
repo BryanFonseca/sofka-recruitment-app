@@ -6,15 +6,14 @@ import { useEffect, useState } from "react";
 
 export const useProductItems = () => {
     const {
-        data: productItems,
+        data: productItems = [],
         isLoading,
         isError,
     } = useQuery({
-        initialData: [],
         queryKey: [queryKeys.products],
         queryFn: async () => {
             const remoteProducts = await findAllProducts();
-            return remoteProducts.map((item) => new ProductItem(item));
+            return remoteProducts.map((item) => ProductItem.fromRemote(item));
         },
     });
 

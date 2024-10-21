@@ -5,3 +5,4 @@ export { List } from "./List/List";
 export { Separator } from "./Separator/Separator";
 export { Button } from "./Button/Button";
 export { ConfirmationBottomSheet } from "./ConfirmationBottomSheet/ConfirmationBottomSheet";
+export { BankCard } from "./BankCard/BankCard";

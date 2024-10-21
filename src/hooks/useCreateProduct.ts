@@ -1,6 +1,7 @@
 import { createProduct as createProductApi } from "@api";
 import { queryKeys } from "@constants";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { ICreationFormValues } from "components/features/ProductForm/interfaces";
 import { ProductItem } from "Models/ProductItem";
 
 interface IUseCreateProductParams {
@@ -18,8 +19,8 @@ export function useCreateProduct({
         isError,
         mutate: createProduct,
     } = useMutation({
-        mutationFn: (localProduct: ProductItem) => {
-            return createProductApi(ProductItem.toRemote(localProduct));
+        mutationFn: (localProduct: ICreationFormValues) => {
+            return createProductApi(new ProductItem(localProduct).toRemote());
         },
         onSuccess: () => {
             queryClient.invalidateQueries({
